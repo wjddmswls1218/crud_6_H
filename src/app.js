@@ -4,13 +4,16 @@ import helmet from "helmet";
 import bodyparser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
+import globalRouter from "./routers/globalRouter";
 
 const app = express();
-const PORT = 7000;
+const PORT = process.env.PORT;
 app.set("view enine", "pug");
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(morgan(`dev`));
 app.use(helmet());
+
+app.use("/", globalRouter);
 
 app.listen(PORT, () => [console.log(`${PORT} server start`)]);
